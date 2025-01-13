@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres
+    container_name: postgres_db_santander
+    restart: always
+    environment:
+      POSTGRES_DB: santander_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+#    networks:
+#      - santandernetwork
+
+  pgadmin:
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "15432:15432"
+    environment:
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
