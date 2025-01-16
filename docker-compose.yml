@@ -11,15 +11,20 @@ services:
       - "5432:5432"
     volumes:
       - ./data:/var/lib/postgresql/data
-#    networks:
-#      - santandernetwork
 
   pgadmin:
+    image: dpage/pgadmin4
     restart: always
     depends_on:
       - postgres
     ports:
-      - "15432:15432"
+      - "15432:80"
     environment:
       PGADMIN_DEFAULT_PASSWORD: admin
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
+
+  redis:
+    image: redis
+    container_name: redis_service
+    ports:
+      - "6379:6379"
